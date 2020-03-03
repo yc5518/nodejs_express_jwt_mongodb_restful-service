@@ -1,17 +1,18 @@
-var bodyParser = require('body-parser');
-// router.use(bodyParser.urlencoded({ extended: false }));
-// router.use(bodyParser.json());
 User = require('../model/userModel');
+const uuid = require('uuid/v4');
 
-var jwt = require('jsonwebtoken');
-var bcrypt = require('bcrypt');
-var config = require('../config');
+let jwt = require('jsonwebtoken');
+let bcrypt = require('bcrypt');
+let config = require('../config');
 
-// Handle create user actions
+// Handle user registration action
 exports.new = function (req, res) {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+
+    // TODO: add salt to hashedPassword
+    let hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
     User.create({
+        _id: uuid(),
         name: req.body.name,
         email: req.body.email,
         gender: req.body.gender,
@@ -19,27 +20,32 @@ exports.new = function (req, res) {
         phone: req.body.phone
     },
         function (err, user) {
-            if (err) return res.status(500).send("There was a problem registering the user.")
+            if (err) {
+                console.log(err);
+                return res.status(500).send("There was a problem registering the user.")
+            }
             // create a token
             var token = jwt.sign({ id: user._id }, config.secret, {
                 expiresIn: 86400 // expires in 24 hours
             });
             res.status(200).send({ auth: true, token: token });
         });
+};
 
-    //     var user = new User();
-    //     user.name = req.body.name ? req.body.name : user.name;
-    //     user.gender = req.body.gender;
-    //     user.email = req.body.email;
-    //     user.password = hashedPassword;
-    //     user.phone = req.body.phone;
-    // // save the user and check for errors
-    //     user.save(function (err) {
-    //         // if (err)
-    //         //     res.json(err);
-    // res.json({
-    //             message: 'New user created!',
-    //             data: user
-    //         });
-    //     });
+// Handle user login action
+exports.login = function (req, res) {
+
+    User.findOne({ email: req.body.email }, function (err, user) {
+        if (err) return res.status(500).send('Error on the server.');
+        if (!user) return res.status(404).send('No user found.');
+
+        let passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+        if (!passwordIsValid) return res.status(401).send({ auth: false, token: null });
+
+        var token = jwt.sign({ id: user._id }, config.secret, {
+            expiresIn: 86400 // expires in 24 hours
+        });
+
+        res.status(200).send({ auth: true, token: token });
+    });
 };

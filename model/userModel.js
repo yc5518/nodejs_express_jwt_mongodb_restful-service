@@ -2,6 +2,7 @@
 var mongoose = require('mongoose');
 // Setup schema
 var userSchema = mongoose.Schema({
+    _id: String,
     name: {
         type: String,
         required: true
@@ -12,11 +13,9 @@ var userSchema = mongoose.Schema({
     },
     gender: String,
     phone: String,
-    create_date: {
-        type: Date,
-        default: Date.now
-    },
     password: String,
+}, {
+    timestamps: true,
 });
 // Export Contact model
 var User = module.exports = mongoose.model('user', userSchema);
