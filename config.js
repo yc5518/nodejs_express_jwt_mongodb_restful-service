@@ -1,4 +1,4 @@
 module.exports = {
-    'secret': 'supersecret'
-    // 'secret': 'somesecret'
+  secret: 'supersecret',
+  // 'secret': 'somesecret'
 };
