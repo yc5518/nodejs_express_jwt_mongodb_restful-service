@@ -11,7 +11,7 @@ exports.view = function viewUser(req, res) {
       if (err) return res.status(500).send('There was a problem finding the user.');
       if (!user) return res.status(404).send('No user found.');
 
-      res.status(200).send(user);
+      return res.status(200).send(user);
     }).lean();
 };
 
@@ -24,9 +24,6 @@ exports.update = function userUpdate(req, res) {
     user.email = req.body.email;
     user.phone = req.body.phone;
 
-    // TODO: add salt to hashedPassword
-    const hashedPassword = bcrypt.hashSync(req.body.password, 8);
-    user.password = hashedPassword;
     // save the user and check for errors
     user.save((error) => {
       if (error) res.json(error);

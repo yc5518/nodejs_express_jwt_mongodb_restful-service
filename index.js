@@ -6,6 +6,7 @@ const apiRoutes = require('./router/api-routes');
 
 const app = express();
 
+// Allow all cors
 app.use(cors());
 
 // Configure bodyparser to handle post requests

@@ -7,7 +7,7 @@ const config = require('../config');
 
 // Handle user registration action
 exports.new = function createUser(req, res) {
-  // TODO: add salt to hashedPassword
+
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   User.create({

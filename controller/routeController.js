@@ -64,25 +64,6 @@ exports.update = function updateRoute(req, res) {
         data: route,
       });
     });
-//   Route.findById({
-//     _id: req.params.route_id,
-//     userId: req.userId,
-//   }, (err, route) => {
-//     if (err) res.send(err);
-//     route.name = req.body.name ? req.body.name : route.name;
-//     route.scheduledStart = req.body.scheduledStart;
-//     route.scheduledEnd = req.body.scheduledEnd;
-//     route.status = req.body.status;
-//     route.userId = req.userId;
-//     // save the contact and check for errors
-//     route.save((error) => {
-//       if (error) res.json(error);
-//       res.json({
-//         message: 'route Info updated',
-//         data: route,
-//       });
-//     });
-//   });
 };
 
 exports.index = function viewAllRoute(req, res) {
