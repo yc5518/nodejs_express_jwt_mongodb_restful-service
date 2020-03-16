@@ -7,7 +7,12 @@ const config = require('../config');
 
 // Handle user registration action
 exports.new = function createUser(req, res) {
-
+  User.findOne({ email: req.body.email })
+    .then((result) => {
+      if (result !== null) {
+        return res.status(409).send(`Email ${req.body.email} already exists in system.`);
+      }
+    });
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   User.create({

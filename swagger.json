@@ -1,323 +1,188 @@
 {
-    "openapi": "3.0.1",
-    "info": {
-      "title": "Node.js Express Practice",
-      "version": "2020-03-05T00:00:00Z"
-    },
-    "servers": [
-      {
-        "url": "https://localhost:8080/{basePath}",
-        "variables": {
-          "basePath": {
-            "default": "api/v1"
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Node.js Express Practice",
+    "version": "2020-03-05T00:00:00Z"
+  },
+  "servers": [
+    {
+      "url": "https://localhost:8080/{basePath}",
+      "variables": {
+        "basePath": {
+          "default": "api/v1"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/register": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResonse"
+                }
+              }
+            }
           }
         }
       }
-    ],
-    "paths": {
-      "/register": {
-        "post": {
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RegistrationRequest"
-                }
+    },
+    "/login": {
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
               }
-            },
-            "required": true
+            }
           },
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/TokenResonse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/login": {
-        "post": {
-          "requestBody": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/LoginRequest"
-                }
-              }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/TokenResonse"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/me": {
-        "get": {
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/UserProfile"
-                  }
-                }
-              }
-            }
-          }
+          "required": true
         },
-        "put": {
-          "requestBody": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResonse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/me": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/UserProfile"
                 }
               }
-            },
-            "required": true
+            }
+          }
+        }
+      },
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserProfile"
+              }
+            }
           },
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "object",
-                        "properties": {
-                          "name": {
-                            "type": "string"
-                          },
-                          "email": {
-                            "type": "string"
-                          },
-                          "gender": {
-                            "type": "string"
-                          },
-                          "phone": {
-                            "type": "string"
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/route": {
-        "get": {
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "object"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "status": {
-                        "type": "string"
-                      },
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "_id": {
-                              "type": "string"
-                            },
-                            "name": {
-                              "type": "string"
-                            },
-                            "scheduledStart": {
-                              "type": "string"
-                            },
-                            "scheduledEnd": {
-                              "type": "string"
-                            },
-                            "status": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/route/{route_id}": {
-        "parameters": [
-          {
-            "name": "route_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "delete": {
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
-                }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/DeleteResponse"
-                  }
-                }
-              }
-            }
-          }
+          "required": true
         },
-        "get": {
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "_id": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "scheduledStart": {
-                        "type": "string"
-                      },
-                      "scheduledEnd": {
-                        "type": "string"
-                      },
-                      "status": {
-                        "type": "string"
-                      }
-                    }
-                  }
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
                 }
               }
-            }
-          }
-        },
-        "put": {
-          "requestBody": {
+            },
             "content": {
               "application/json": {
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "name": {
+                    "message": {
                       "type": "string"
                     },
-                    "scheduledStart": {
-                      "type": "string"
-                    },
-                    "scheduledEnd": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "string"
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "gender": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string"
+                        }
+                      }
                     }
                   }
                 }
               }
-            },
-            "required": true
-          },
-          "responses": {
-            "200": {
-              "description": "200 response",
-              "headers": {
-                "Access-Control-Allow-Origin": {
-                  "schema": {
-                    "type": "string"
-                  }
+            }
+          }
+        }
+      }
+    },
+    "/route": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "object"
                 }
-              },
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "object",
-                    "properties": {
-                      "message": {
-                        "type": "string"
-                      },
-                      "data": {
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
                         "type": "object",
                         "properties": {
                           "_id": {
@@ -344,93 +209,284 @@
             }
           }
         }
+      },
+      "post": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRouteReqeust"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
-    "components": {
-      "schemas": {
-        "RegistrationRequest": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
+    "/route/{route_id}": {
+      "parameters": [
+        {
+          "name": "route_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             },
-            "email": {
-              "type": "string"
-            },
-            "gender": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "name",
-            "email",
-            "gender",
-            "password",
-            "phone"
-          ],
-          "additionalProperties": false
-        },
-        "LoginRequest": {
-          "type": "object",
-          "properties": {
-            "email": {
-              "type": "string"
-            },
-            "password": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "email",
-            "password"
-          ],
-          "additionalProperties": false
-        },
-        "DeleteResponse": {
-          "type": "object",
-          "properties": {
-            "status": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteResponse"
+                }
+              }
             }
           }
-        },
-        "TokenResonse": {
-          "type": "object",
-          "properties": {
-            "auth": {
-              "type": "boolean"
-            },
-            "token": {
-              "type": "string"
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "scheduledStart": {
+                      "type": "string"
+                    },
+                    "scheduledEnd": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
+        }
+      },
+      "put": {
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "scheduledStart": {
+                    "type": "string"
+                  },
+                  "scheduledEnd": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
         },
-        "UserProfile": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
+        "responses": {
+          "200": {
+            "description": "200 response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
             },
-            "email": {
-              "type": "string"
-            },
-            "gender": {
-              "type": "string"
-            },
-            "phone": {
-              "type": "string"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "scheduledStart": {
+                          "type": "string"
+                        },
+                        "scheduledEnd": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
     }
+  },
+  "components": {
+    "schemas": {
+      "CreateRouteReqeust": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "scheduledStart": {
+            "type": "string"
+          },
+          "scheduledEnd": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "RegistrationRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "email",
+          "gender",
+          "password",
+          "phone"
+        ],
+        "additionalProperties": false
+      },
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ],
+        "additionalProperties": false
+      },
+      "DeleteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "TokenResonse": {
+        "type": "object",
+        "properties": {
+          "auth": {
+            "type": "boolean"
+          },
+          "token": {
+            "type": "string"
+          }
+        }
+      },
+      "UserProfile": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          }
+        }
+      }
+    }
   }
+}

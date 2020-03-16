@@ -1,4 +1,6 @@
 const express = require('express');
+const https = require('https');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -30,7 +32,15 @@ app.get('/', (req, res) => res.send('Hello World with Express'));
 
 // Use Api routes in the App
 app.use('/api/v1', apiRoutes);
-// Launch app to listen to specified port
+
+// Launch app with http to listen to specified port
 app.listen(port, () => {
   console.log(`Running RestHub on port ${port}`);
 });
+
+// Launch app with httpS to listen to specified port
+// https.createServer({
+//   key: fs.readFileSync('./key.pem'),
+//   cert: fs.readFileSync('./cert.pem'),
+//   passphrase: 'yc5518',
+// }, app).listen(port);
