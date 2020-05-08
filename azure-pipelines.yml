@@ -15,7 +15,7 @@ variables:
   webAppName: 'node-cd-practice
   
   # Environment name
-  environmentName: 'Azure env'
+  environmentName: 'Azure-env'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
