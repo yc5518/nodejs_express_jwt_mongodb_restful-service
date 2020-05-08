@@ -12,10 +12,10 @@ variables:
   azureSubscription: 'a4e33e97-fa7e-4b32-87ab-64b102ffa8ad'
 
   # Web app name
-  webAppName: ''
+  webAppName: 'node-cd-practice
   
   # Environment name
-  environmentName: ''
+  environmentName: 'Azure env'
 
   # Agent VM image name
   vmImageName: 'ubuntu-latest'
