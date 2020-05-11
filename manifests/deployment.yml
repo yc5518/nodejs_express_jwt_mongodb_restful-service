@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "freetrialaks"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "freetrialaks"
+    spec:
+      containers:
+        - name: "freetrialaks"
+          image: "freecontainer.azurecr.io/freetrialaks"
+          ports:
+          - containerPort: 8081
