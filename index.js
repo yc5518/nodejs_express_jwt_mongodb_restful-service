@@ -16,8 +16,8 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(bodyParser.json());
-// Connect to Mongoose and set connection variable
-mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true });
+mongoose.connect('mongodb://yc5518:GkRTjFhU6jhsrARZdthyl0UksLSo5WErretg5sehEIBzfbdmkluCJklBScutluZWckQrGCJGsp87oAEsupCoPQ==@yc5518.mongo.cosmos.azure.com:10255/resthub?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@yc5518@', { useNewUrlParser: true });
+// mongodb://yc5518:GkRTjFhU6jhsrARZdthyl0UksLSo5WErretg5sehEIBzfbdmkluCJklBScutluZWckQrGCJGsp87oAEsupCoPQ==@yc5518.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@yc5518@
 const db = mongoose.connection;
 
 // Added check for DB connection
