@@ -1,7 +1,7 @@
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 const Route = require('../model/routeModel');
 
-exports.new = function createRoute(req, res) {
+exports.new = async(req, res) => {
   Route.create({
     _id: uuid(),
     userId: req.userId,
@@ -18,7 +18,7 @@ exports.new = function createRoute(req, res) {
   });
 };
 
-exports.view = function viewRouteById(req, res) {
+exports.view = async(req, res) => {
   Route.findById({
     _id: req.params.route_id,
     userId: req.userId,
@@ -34,7 +34,7 @@ exports.view = function viewRouteById(req, res) {
   }).lean();
 };
 
-exports.delete = function deleteRoute(req, res) {
+exports.delete = async (req, res) => {
   Route.remove({
     _id: req.params.route_id, userId: req.userId,
   }, (err) => {

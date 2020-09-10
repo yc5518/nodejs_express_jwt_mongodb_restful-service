@@ -1,6 +1,4 @@
 const express = require('express');
-const https = require('https');
-const fs = require('fs');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -16,8 +14,7 @@ app.use(bodyParser.urlencoded({
   extended: true,
 }));
 app.use(bodyParser.json());
-mongoose.connect('mongodb://yc5518:GkRTjFhU6jhsrARZdthyl0UksLSo5WErretg5sehEIBzfbdmkluCJklBScutluZWckQrGCJGsp87oAEsupCoPQ==@yc5518.mongo.cosmos.azure.com:10255/resthub?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@yc5518@', { useNewUrlParser: true });
-// mongodb://yc5518:GkRTjFhU6jhsrARZdthyl0UksLSo5WErretg5sehEIBzfbdmkluCJklBScutluZWckQrGCJGsp87oAEsupCoPQ==@yc5518.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@yc5518@
+mongoose.connect('mongodb://localhost/resthub', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 // Added check for DB connection

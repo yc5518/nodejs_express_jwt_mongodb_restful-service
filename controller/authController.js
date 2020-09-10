@@ -1,4 +1,4 @@
-const uuid = require('uuid/v4');
+const { v4: uuid } = require('uuid');
 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
@@ -6,13 +6,9 @@ const User = require('../model/userModel');
 const config = require('../config');
 
 // Handle user registration action
-exports.new = function createUser(req, res) {
-  User.findOne({ email: req.body.email })
-    .then((result) => {
-      if (result !== null) {
-        return res.status(409).send(`Email ${req.body.email} already exists in system.`);
-      }
-    });
+exports.new = async (req, res) => {
+  const result = await User.find({ email: req.body.email }).lean();
+  if (result.length !== 0) return res.status(400).send(`Email ${req.body.email} already exists in system.`);
   const hashedPassword = bcrypt.hashSync(req.body.password, 8);
 
   User.create({
@@ -25,7 +21,7 @@ exports.new = function createUser(req, res) {
   },
   (err, user) => {
     if (err) {
-      return res.status(500).send('There was a problem registering the user.');
+      return res.status(500).send(`There was a problem registering the user: ${err}`);
     }
     // create a token
     // eslint-disable-next-line no-underscore-dangle
@@ -37,7 +33,7 @@ exports.new = function createUser(req, res) {
 };
 
 // Handle user login action
-exports.login = function login(req, res) {
+exports.login = async (req, res) => {
   User.findOne({ email: req.body.email }, (err, user) => {
     if (err) return res.status(500).send('Error on the server.');
     if (!user) return res.status(404).send('No user found.');

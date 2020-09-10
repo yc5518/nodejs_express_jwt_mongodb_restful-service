@@ -9,7 +9,7 @@ servers:
     basePath:
       default: api/v1
 paths:
-  "/register":
+  "/account/register":
     post:
       requestBody:
         content:
@@ -28,7 +28,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TokenResonse"
-  "/login":
+  "/account/login":
     post:
       requestBody:
         content:
@@ -47,7 +47,7 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/TokenResonse"
-  "/me":
+  "/account/profile":
     get:
       responses:
         '200':

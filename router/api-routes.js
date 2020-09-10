@@ -10,14 +10,14 @@ router.use('/api-docs', swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 // APIs that do NOT require authentication
-router.route('/register')
+router.route('/account/register')
   .post(authController.new);
 
-router.route('/login')
+router.route('/account/login')
   .post(authController.login);
 
 // APIs that require authentication
-router.route('/me')
+router.route('/account/profile')
   .get(verifyToken, userController.view)
   .patch(verifyToken, userController.update)
   .put(verifyToken, userController.update);

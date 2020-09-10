@@ -15,7 +15,7 @@
     }
   ],
   "paths": {
-    "/register": {
+    "/account/register": {
       "post": {
         "requestBody": {
           "content": {
@@ -48,7 +48,7 @@
         }
       }
     },
-    "/login": {
+    "/account/login": {
       "post": {
         "requestBody": {
           "content": {
@@ -81,7 +81,7 @@
         }
       }
     },
-    "/me": {
+    "/account/profile": {
       "get": {
         "responses": {
           "200": {
