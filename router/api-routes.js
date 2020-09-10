@@ -1,13 +1,20 @@
 const router = require('express').Router();
 const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
 const verifyToken = require('../middleware/verifyToken');
 const userController = require('../controller/userController');
 const authController = require('../controller/authController');
 const routeController = require('../controller/routeController');
-const swaggerDocument = require('../swagger.json');
 
-router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(swaggerDocument));
+const swaggerDocument = YAML.load('./swagger.yaml');
+// const swaggerDocument = require('../swagger.json');
+
+// Dynamically set the host
+router.use('/api-docs', (req, res, next) => {
+  swaggerDocument.host = req.get('host');
+  req.swaggerDoc = swaggerDocument;
+  next();
+}, swaggerUi.serve, swaggerUi.setup());
 
 // APIs that do NOT require authentication
 router.route('/account/register')

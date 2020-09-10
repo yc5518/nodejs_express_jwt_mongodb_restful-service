@@ -1,7 +1,7 @@
 const { v4: uuid } = require('uuid');
 const Route = require('../model/routeModel');
 
-exports.new = async(req, res) => {
+exports.new = async (req, res) => {
   Route.create({
     _id: uuid(),
     userId: req.userId,
@@ -18,7 +18,7 @@ exports.new = async(req, res) => {
   });
 };
 
-exports.view = async(req, res) => {
+exports.view = async (req, res) => {
   Route.findById({
     _id: req.params.route_id,
     userId: req.userId,
